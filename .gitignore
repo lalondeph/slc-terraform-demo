@@ -1,0 +1,52 @@
+# IDE/Editor configurations
+# These files are specific to your local development environment and
+# should not be shared across team members as they can cause conflicts.
+.idea/
+*.iml
+
+# Environment variables
+# `.env` files often contain sensitive information such as API keys,
+# database credentials, or other secrets. Exclude them to prevent leaks.
+.env
+
+# Terraform files and directories
+# These files include sensitive information like state files,
+# temporary cache data, and lock files, which should not be versioned.
+.terraform.lock.hcl
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
+# Terraform variable and override files
+# Variables and override files may contain secrets or configuration-specific
+# details that should not be committed to the repository.
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform RC files
+# These files are for user-specific configurations and should remain private.
+.terraformrc
+terraform.rc
+
+# Log files
+# Log files are generated dynamically during runtime and are not useful for version control.
+*.log
+
+# Go build artifacts (if applicable)
+# These are compiled binaries and other build artifacts generated during the
+# build process. They should not be committed to keep the repository clean.
+bin/
+pkg/
+*.out
+*.exe
+*.test
+
+# General files
+# Operating system or editor-specific files that are not relevant to the project.
+.DS_Store
+Thumbs.db
+
