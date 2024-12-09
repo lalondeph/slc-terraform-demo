@@ -1,2 +1,2 @@
-bucket = "slc-tf-prod"
-prefix = "tf-cloud-function"
+bucket = "free-sandbox-tf"
+prefix = "prod-tf-cloud-function"

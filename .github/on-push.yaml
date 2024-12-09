@@ -1,0 +1,93 @@
+name: "On Push"
+
+on:
+  push:
+
+env:
+  TF_VAR_gcp_project_id: free-sandbox-444203
+
+jobs:
+  terraform_validate:
+    name: "Terraform Validate and Plan"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    outputs:
+      plan_exit_code: ${{ steps.terraform-plan.outputs.exit_code }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.7
+          cache-dependency-path: "**/*.sum"
+
+      - name: Build Cloud Function
+        working-directory: golang/cloud-function
+        run: go mod vendor
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Auth GCP
+        id: auth_gcp
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.SANDBOX_KEY }}
+
+      - name: Terraform Validate
+        run: |
+          terraform fmt -check
+          terraform init -backend-config="pilot.gcs.tfbackend"
+          terraform validate -no-color
+
+      - name: Terraform Plan
+        id: terraform-plan
+        run: |
+          terraform init -backend-config="pilot.gcs.tfbackend"
+          terraform plan -detailed-exitcode
+        continue-on-error: true
+
+      - name: Capture Plan Exit Code
+        run: echo "exit_code=$?" >> $GITHUB_ENV
+        id: capture_exit_code
+
+  terraform_apply:
+    name: "Terraform Approve and Apply"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: terraform_validate
+    if: needs.terraform_validate.outputs.plan_exit_code == 0
+    environment: terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.7
+          cache-dependency-path: "**/*.sum"
+
+      - name: Build Cloud Function
+        working-directory: golang/cloud-function
+        run: go mod vendor
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Auth GCP
+        id: auth_gcp
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.SANDBOX_KEY }}
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
