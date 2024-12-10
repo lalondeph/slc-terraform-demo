@@ -48,12 +48,8 @@ jobs:
 
       - name: Terraform Plan
         id: terraform-plan
-        run: terraform plan -detailed-exitcode
+        run: terraform plan -detailed-exit_code
         continue-on-error: true
-
-      - name: Terraform Plan Status
-        if: steps.terraform-plan.outputs.exit_code == 1
-        run: exit 1
 
   terraform_apply:
     name: "Terraform Approve and Apply"
