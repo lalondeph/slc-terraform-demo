@@ -58,7 +58,6 @@ jobs:
       contents: read
       id-token: write
     needs: terraform_validate
-    if: needs.terraform_validate.outputs.plan_exit_code > 0
     environment: terraform
     steps:
       - name: Checkout
