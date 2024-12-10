@@ -6,8 +6,8 @@ locals {
 data "google_project" "project" {}
 
 resource "google_project_service" "cloudresourcemanager" {
-  project = var.google_project_id
-  service = "cloudresourcemanager.googleapis.com"
+  project            = var.google_project_id
+  service            = "cloudresourcemanager.googleapis.com"
   disable_on_destroy = false #
 }
 
