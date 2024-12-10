@@ -5,6 +5,12 @@ locals {
 
 data "google_project" "project" {}
 
+resource "google_project_service" "cloudresourcemanager" {
+  project = var.google_project_id
+  service = "cloudresourcemanager.googleapis.com"
+  disable_on_destroy = false #
+}
+
 resource "google_storage_bucket" "cloud-fn-source" {
   name                        = "cloud-fn-source"
   project                     = var.google_project_id
