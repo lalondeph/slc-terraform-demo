@@ -52,7 +52,7 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Plan Status
-        if: steps.terraform-plan.outputs.exitode == 1
+        if: steps.terraform-plan.outputs.exitcode == 1
         run: exit 1
 
   terraform_apply:
