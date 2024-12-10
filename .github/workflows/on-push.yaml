@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  TF_VAR_gcp_project_id: free-sandbox-444203
+  TF_VAR_google_project_id: free-sandbox-444203
 
 jobs:
   terraform_validate:
