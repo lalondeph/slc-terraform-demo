@@ -43,7 +43,7 @@ jobs:
       - name: Terraform Validate
         run: |
           terraform fmt -check
-          terraform init -reconfigure -backend-config="pilot.gcs.tfbackend"
+          terraform init -backend-config="pilot.gcs.tfbackend"
           terraform validate -no-color
 
       - name: Terraform Plan
