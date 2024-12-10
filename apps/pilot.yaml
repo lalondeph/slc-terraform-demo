@@ -4,5 +4,5 @@ members:
         member: "user:lalondeph@gmail.com"
     tax:
         role: "roles/viewer"
-        member: "usre:lalondeph@gmail.com"
+        member: "user:lalondeph@gmail.com"
 
