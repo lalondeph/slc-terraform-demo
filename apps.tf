@@ -1,5 +1,5 @@
 locals {
-  is_prod = var.google_project_id != "production"
+  is_prod = var.google_project_id != "free-sandbox-444203"
   apps    = local.is_prod ? yamldecode(file("${path.root}/apps/prod.yaml")) : yamldecode(file("${path.root}/apps/pilot.yaml"))
 }
 
