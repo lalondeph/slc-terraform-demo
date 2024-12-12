@@ -40,7 +40,7 @@ resource "google_cloudfunctions2_function" "function-from-yaml" {
     min_instance_count    = 0
     max_instance_count    = 1
     available_memory      = "256Mi"
-    timeout_seconds       = 10
+    timeout_seconds       = 60
     service_account_email = google_service_account.fn_service_act.email
     environment_variables = var.runtime_vars
   }
