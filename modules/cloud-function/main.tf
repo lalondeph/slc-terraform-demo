@@ -13,7 +13,7 @@ data "archive_file" "zip" {
 }
 
 resource "google_project_iam_binding" "functions-service-account" {
-  project = var.google_project_id
+  project = var.project_id
   role    = "roles/cloudfunctions.admin"
 
   members = [
