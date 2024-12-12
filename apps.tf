@@ -11,31 +11,9 @@ resource "google_project_service" "cloudresourcemanager" {
   disable_on_destroy = false #
 }
 
-resource "google_storage_bucket" "cloud-fn-source" {
-  name                        = "cloud-fn-source"
-  project                     = var.google_project_id
-  location                    = var.project_region
-  uniform_bucket_level_access = true
-  public_access_prevention    = "enforced"
-}
-
 resource "google_project_iam_member" "members-from-yaml" {
   for_each = local.apps.members
   project  = var.google_project_id
   role     = each.value.role
   member   = each.value.member
-}
-
-module "functions-from-yaml" {
-  source   = "./modules/cloud-function"
-  for_each = local.apps.functions
-
-  project_id           = var.google_project_id
-  project_region       = var.project_region
-  function_name        = each.value.name
-  function_description = each.value.description
-  source_dir           = "${path.root}/golang/cloud-function"
-  entry_point          = each.value.entry_point
-  source_bucket        = google_storage_bucket.cloud-fn-source.name
-  runtime_vars         = each.value.runtime_vars
 }
