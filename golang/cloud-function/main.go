@@ -1,4 +1,4 @@
-//package cloud_function
+package cloud_function
 //
 //import (
 //	"context"
@@ -19,7 +19,7 @@
 
 
 // Sample run-helloworld is a minimal Cloud Run service.
-package main
+//package main
 
 import (
 	"fmt"
