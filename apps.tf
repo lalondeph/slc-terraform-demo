@@ -31,10 +31,11 @@ module "functions-from-yaml" {
   for_each = local.apps.functions
 
   project_id           = var.google_project_id
-  function_name        = each.name
-  function_description = each.description
+  project_region       = var.project_region
+  function_name        = each.value.name
+  function_description = each.value.description
   source_dir           = "${path.root}/golang/cloud-function"
-  entry_point          = each.entry_point
+  entry_point          = each.value.entry_point
   source_bucket        = google_storage_bucket.cloud-fn-source.name
-  runtime_vars         = each.runtime_vars
+  runtime_vars         = each.value.runtime_vars
 }

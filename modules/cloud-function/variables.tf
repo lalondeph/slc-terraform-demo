@@ -1,4 +1,5 @@
 variable "project_id" {}
+variable "project_region" { dedefault = "northamerica-northeast1" }
 variable "function_name" {}
 variable "function_description" {}
 variable "source_dir" {}
