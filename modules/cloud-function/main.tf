@@ -30,8 +30,8 @@ resource "google_cloudfunctions2_function" "function-from-yaml" {
 
     source {
       storage_source {
-        bucket = google_storage_bucket_object.fn-zip.bucket
-        object = google_storage_bucket_object.fn-zip.name
+        bucket = google_storage_bucket_object.function-zip.bucket
+        object = google_storage_bucket_object.function-zip.name
       }
     }
   }
