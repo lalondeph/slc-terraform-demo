@@ -22,7 +22,7 @@ resource "google_cloudfunctions2_function" "function-from-yaml" {
   name           = var.function_name
   description    = var.function_description
   project        = var.project_id
-  project_region = var.project_region
+  location       = var.project_region
 
   build_config {
     runtime     = "go122"
