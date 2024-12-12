@@ -8,7 +8,7 @@ members:
 
 functions:
     test-function:
-        name: "SLC-pilot-function"
+        name: "slc-pilot-function"
         description: "A Cool v2 function from terraform"
         entry_point: "HandleRequest"
         runtime_vars:

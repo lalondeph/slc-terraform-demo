@@ -8,7 +8,7 @@ members:
 
 functions:
     test-function:
-        name: "SLC-prod-function"
+        name: "slc-prod-function"
         description: "A Cool v2 function from terraform"
         entry_point: "HandleRequest"
         runtime_vars:

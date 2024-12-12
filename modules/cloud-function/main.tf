@@ -12,10 +12,10 @@ data "archive_file" "zip" {
   output_path = "/tmp/${var.function_name}.zip"
 }
 
-resource "google_storage_bucket_object" "fn-zip" {
+resource "google_storage_bucket_object" "function-zip" {
   bucket = var.source_bucket
   name   = "${var.function_name}/${data.archive_file.zip.output_md5}.zip"
-  source = data.archive_file.zip
+  source = data.archive_file.zip.output_path
 }
 
 resource "google_cloudfunctions2_function" "function-from-yaml" {
