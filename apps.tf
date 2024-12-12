@@ -26,7 +26,7 @@ resource "google_project_iam_member" "members-from-yaml" {
   member   = each.value.member
 }
 
-resource "google_cloud_run_v2_fun" "fn-from-yaml" {
+resource "google_cloud_run_v2_function" "fn-from-yaml" {
   source   = "./modules/cloud-function"
   for_each = local.apps.functions
 
