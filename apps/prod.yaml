@@ -10,6 +10,6 @@ functions:
     test-function:
         name: "slc-prod-function"
         description: "A Cool v2 function from terraform"
-        entry_point: "HandleRequest"
+        entry_point: "main"
         runtime_vars:
             LOG_MSG: "Hello World!"
