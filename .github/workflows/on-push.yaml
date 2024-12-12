@@ -15,7 +15,7 @@ jobs:
       id-token: write
 
     outputs:
-      plan_exit_code: ${{ steps.terraform-plan.outputs.exit_code }}
+      plan_exit_code: ${{ steps.terraform-plan.outputs.exitcode }}
 
     steps:
       - name: Checkout
@@ -49,8 +49,11 @@ jobs:
       - name: Terraform Plan
         id: terraform-plan
         run: terraform plan -detailed-exitcode
-        continue-on-error: true
-
+        
+      - name: Terraform Plan status
+        if: steps.terraform-plan.outputs.exitcode == 1
+        run: exit 1
+      
   terraform_apply:
     name: "Terraform Approve and Apply"
     runs-on: ubuntu-latest
@@ -58,6 +61,7 @@ jobs:
       contents: read
       id-token: write
     needs: terraform_validate
+    if: needs.terraform_validate.outputs.plan_exit_code > 0
     environment: terraform
     steps:
       - name: Checkout
@@ -85,7 +89,7 @@ jobs:
       - name: Terraform Validate
         run: |
           terraform fmt -check
-          terraform init -reconfigure -backend-config="pilot.gcs.tfbackend"
+          terraform init -backend-config="pilot.gcs.tfbackend"
           terraform validate -no-color
 
       - name: Terraform Apply

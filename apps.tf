@@ -25,3 +25,16 @@ resource "google_project_iam_member" "members-from-yaml" {
   role     = each.value.role
   member   = each.value.member
 }
+
+resource "google_cloud_run_v2_fun" "fn-from-yaml" {
+  source   = "./modules/cloud-function"
+  for_each = local.apps.functions
+
+  project_id           = var.google_project_id
+  function_name        = each.name
+  function_description = each.description
+  source_dir           = "${path.root}/golang/cloud-function"
+  entry_point          = each.entry_point
+  source_bucket        = google_storage_bucket.cloud-fn-source.name
+  runtime_vars         = each.runtime_vars
+}

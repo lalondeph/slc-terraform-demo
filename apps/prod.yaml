@@ -5,3 +5,11 @@ members:
     tax:
         role: "roles/viewer"
         member: "user:lalondeph@gmail.com"
+
+functions:
+    test-function:
+        name: "SLC-prod-function"
+        description: "A Cool v2 function from terraform"
+        entry_point: "HandleRequest"
+        runtime_vars:
+            LOG_MSG: "Hello World!"
