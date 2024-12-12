@@ -8,8 +8,17 @@ resource "google_service_account" "fn_service_act" {
 data "archive_file" "zip" {
   type        = "zip"
   source_dir  = var.source_dir
-  excludes    = ["curl", "cmd", "README.md", "start.sh"]
   output_path = "/tmp/${var.function_name}.zip"
+  excludes    = ["README.md", "*.sh"]
+}
+
+resource "google_project_iam_binding" "functions-service-account" {
+  project = var.google_project_id
+  role    = "roles/cloudfunctions.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.fn_service_act.email}"
+  ]
 }
 
 resource "google_storage_bucket_object" "function-zip" {
