@@ -17,3 +17,15 @@ resource "google_project_iam_member" "members-from-yaml" {
   role     = each.value.role
   member   = each.value.member
 }
+
+module "cloud-storage-from-yaml" {
+  source   = "./modules/cloud-storage"
+  for_each = local.apps.buckets
+
+  project_id            = var.google_project_id
+  project_region        = var.project_region
+  bucket_name           = each.key
+  lifecycle_rules       = each.value.lifecycle_rule
+  iam_members           = each.value.iam_members
+  bucket_objects        = each.value.bucket_objects
+}
