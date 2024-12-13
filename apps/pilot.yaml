@@ -18,6 +18,7 @@ buckets:
         bucket_objects:
             - "A Folder Kind Of"
     slc-test-bucket:
+        lifecycle_rule: "delete_7d"
         iam_members: []
         bucket_objects: []
 
