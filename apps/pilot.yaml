@@ -9,7 +9,7 @@ members:
 groups:
     managers:
         membres:
-            lalondeph@gmail.com
+            - "lalondeph@gmail.com"
     cool-people:
         members: []
 
@@ -23,6 +23,9 @@ buckets:
     another-amazing-bucket:
         lifecycle_rules: "delete_7d"
         iam_members:
-            - {role: "roles/storage.objectUser" member: "user:lalondeph@gmail.com"}
-        bucket_objects: ["A Folder Kind Of",]
-        notification_topics: ["a-new-file"]
+            - role: "roles/storage.objectUser"
+              member: "user:lalondeph@gmail.com"
+        bucket_objects:
+            - "A Folder Kind Of"
+        notification_topics:
+            - "a-new-file"

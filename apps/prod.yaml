@@ -8,8 +8,8 @@ members:
 
 groups:
     managers_prod:
-        membres:
-            lalondeph@gmail.com
+        members:
+            - "lalondeph@gmail.com"
     cool-people_prod:
         members: []
 
@@ -22,6 +22,9 @@ buckets:
     another-amazing-bucket_prod:
         lifecycle_rules: "delete_7d"
         iam_members:
-            - {role: "roles/storage.objectUser" member: "user:lalondeph@gmail.com"}
-        bucket_objects: ["A Prod Folder Kind Of",]
-        notification_topics: ["a-new-prod-file"]
+            - role: "roles/storage.objectUser"
+              member: "user:lalondeph@gmail.com"
+        bucket_objects:
+            - "A Prod Folder Kind Of"
+        notification_topics:
+            - "a-new-prod-file"
