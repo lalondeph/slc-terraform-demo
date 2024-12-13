@@ -26,7 +26,7 @@ resource "google_storage_bucket_iam_member" "bucket-members" {
 resource "google_storage_bucket_object" "objects" {
   for_each = toset(var.bucket_objects)
 
-  bucket = google_storage_bucket.bucket.name
-  name   = each.value
-  source = "path/to/source/${each.value}"
+  name    = "${each.value}/"
+  bucket  = google_storage_bucket.bucket.name
+  content = "these file are imaginary"
 }
