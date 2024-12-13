@@ -1,8 +1,10 @@
+# Define local variables that will be used later in the configuration.
 locals {
   is_prod = var.google_project_id != "free-sandbox-444203"
   apps    = local.is_prod ? yamldecode(file("${path.root}/apps/prod.yaml")) : yamldecode(file("${path.root}/apps/pilot.yaml"))
 }
 
+# Fetch data about the current Google Cloud project. This data source doesn't create resources but just retrieves information.
 data "google_project" "project" {}
 
 resource "google_project_service" "cloudresourcemanager" {
