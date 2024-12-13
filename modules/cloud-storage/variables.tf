@@ -25,7 +25,7 @@ variable "iam_members" {
     role   = string
     member = string
   }))
-  default = {}
+  default = []
 }
 
 variable "bucket_objects" {
