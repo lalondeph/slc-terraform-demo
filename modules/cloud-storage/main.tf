@@ -14,8 +14,8 @@ resource "google_storage_bucket" "bucket" {
 }
 
 # Assign IAM roles to the bucket for the specified members.
-resource "google_storage_bucket_iam_member" "iam" {
-  for_each = toset(var.iam_members)
+resource "google_storage_bucket_iam_member" "bucket-members" {
+  for_each = { for member in var.iam_members : member.member => member }
 
   bucket = google_storage_bucket.bucket.name
   role   = each.value.role

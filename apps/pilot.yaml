@@ -14,7 +14,6 @@ buckets:
     another-amazing-bucket:
         lifecycle_rule: "delete_7d"
         iam_members:
-            - role: "roles/storage.objectUser"
-              member: "user:lalondeph@gmail.com"
+            - { role: "roles/storage.objectUser", member: "user:lalondeph@gmail.com" }
         bucket_objects:
             - "A Folder Kind Of"
