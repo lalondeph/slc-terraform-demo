@@ -5,3 +5,23 @@ members:
     tax:
         role: "roles/viewer"
         member: "user:lalondeph@gmail.com"
+
+groups:
+    managers_prod:
+        membres:
+            lalondeph@gmail.com
+    cool-people_prod:
+        members: []
+
+buckets:
+    wow-look-a-bucket_prod:
+        lifecycle_rules: "delete_30d"
+        iam_members: []
+        bucket_objects: []
+        notification_topics: []
+    another-amazing-bucket_prod:
+        lifecycle_rules: "delete_7d"
+        iam_members:
+            - {role: "roles/storage.objectUser" member: "user:lalondeph@gmail.com"}
+        bucket_objects: ["A Prod Folder Kind Of",]
+        notification_topics: ["a-new-prod-file"]

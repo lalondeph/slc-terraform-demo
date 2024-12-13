@@ -5,3 +5,24 @@ members:
     tax:
         role: "roles/viewer"
         member: "user:lalondeph@gmail.com"
+
+groups:
+    managers:
+        membres:
+            lalondeph@gmail.com
+    cool-people:
+        members: []
+
+
+buckets:
+    wow-look-a-bucket:
+        lifecycle_rules: "delete_30d"
+        iam_members: []
+        bucket_objects: []
+        notification_topics: []
+    another-amazing-bucket:
+        lifecycle_rules: "delete_7d"
+        iam_members:
+            - {role: "roles/storage.objectUser" member: "user:lalondeph@gmail.com"}
+        bucket_objects: ["A Folder Kind Of",]
+        notification_topics: ["a-new-file"]
