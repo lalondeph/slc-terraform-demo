@@ -8,25 +8,25 @@ resource "google_storage_bucket" "bucket" {
       age = tonumber(regex("delete_(\\d+)d", var.lifecycle_rules)[0])
     }
     action {
-        type = "Delete"
-      }
+      type = "Delete"
     }
   }
+}
 
-  # Assign IAM roles to the bucket for the specified members.
-  resource "google_storage_bucket_iam_member" "iam" {
-    for_each = toset(var.iam_members)
+# Assign IAM roles to the bucket for the specified members.
+resource "google_storage_bucket_iam_member" "iam" {
+  for_each = toset(var.iam_members)
 
-    bucket = google_storage_bucket.bucket.name
-    role   = each.value.role
-    member = each.value.member
-  }
+  bucket = google_storage_bucket.bucket.name
+  role   = each.value.role
+  member = each.value.member
+}
 
-  # Upload or create objects (files or folders) in the bucket.
-  resource "google_storage_bucket_object" "objects" {
-    for_each = toset(var.bucket_objects)
+# Upload or create objects (files or folders) in the bucket.
+resource "google_storage_bucket_object" "objects" {
+  for_each = toset(var.bucket_objects)
 
-    bucket = google_storage_bucket.bucket.name
-    name   = each.value
-    source = "path/to/source/${each.value}"
-  }
+  bucket = google_storage_bucket.bucket.name
+  name   = each.value
+  source = "path/to/source/${each.value}"
+}
